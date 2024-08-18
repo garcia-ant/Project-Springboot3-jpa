@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.gpost.course.entities.Order;
 import com.gpost.course.repositories.OrderRepository;
+import com.gpost.course.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class OrderService  {
@@ -20,7 +21,7 @@ public class OrderService  {
 	}
 	public Order findById(Long id) {	
 	Optional<Order> obj =  repository.findById(id);
-	return obj.get();	
+	return obj.orElseThrow(() -> new ResourceNotFoundException(id));	
 	
 	}
 	
